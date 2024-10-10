@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class BruteForceSearch {
+class BruteForceSearch {
     private String step = "step0";
     private boolean direction;
     int mainS;
@@ -12,16 +12,61 @@ public class BruteForceSearch {
     private String subString;
     int response;
 
-    public BruteForceSearch(String mainString, String subString, boolean direction) {
+    public int BruteForceSearch(String mainString, String subString, boolean direction) {
         this.direction = direction;
         this.mainString = mainString;
         this.subString = subString;
-
+        return move();
     }
-    public void move(){
+    public int move(){
+        if(direction){
         switch(step){
-            case
-    }
+            case "step0":
+                mainS = mainString.length();
+                subS = subString.length();
+                currentIndex = 0;
+                if(direction)step = "step1";
+                else step = "step1_reverse";
+                break;
+            case "step1":
+                if(mainS > subS) {
+                    subIndex = 0;
+                    savedIndex = currentIndex;
+                    if(subIndex < subS && currentIndex < mainS && mainString.charAt(currentIndex) == subString.charAt(subIndex) ) {
+                        step = "step2";
+                    }
+                    if(subIndex == subS){
+                        step = "step3";
+                    }
+                    if (currentIndex == mainS) {
+                        step = "step4";
+                    }
+                    break;
+                }
+            case "step2":
+                System.out.println(currentIndex);
+                currentIndex++;
+                subIndex++;
+                step = "step1";
+                break;
+            case "step3":
+                response =  currentIndex - subS;
+                System.out.println(response);
+                return response;
+                break;
+            case "step4":
+                response =  -1;
+                return response;
+                break;
+            }
+        }
+        else {
+            // sudo rm -rf
+            }
+        }
+
+
+}
 
     /*public static double bruteForceSearch(String mainString, String substring) {
         int mainS = mainString.length();
@@ -52,72 +97,3 @@ public class BruteForceSearch {
 
         } return -1;
     }*/
-
-    public void step0(){
-        mainS = mainString.length();
-        subS = subString.length();
-        currentIndex = 0;
-        if(direction)step = "step1";
-        else step = "step1_reverse";
-    }
-    private void step1(){
-        if(mainS > subS) {
-            subIndex = 0;
-            savedIndex = currentIndex;
-            if(subIndex < subS && currentIndex < mainS && mainString.charAt(currentIndex) == subString.charAt(subIndex) ) {
-                step = "step2";
-            }
-            if(subIndex == subS){
-                step = "step3";
-            }
-            if (currentIndex == mainS) {
-                step = "step4";
-            }
-        }
-    }
-    public void step2(){
-        currentIndex++;
-        subIndex++;
-        step = "step1";
-    }
-    private void step3(){
-        response =  currentIndex - subS;
-    }
-    private void step4(){
-        response =  -1;
-    }
-
-
-
-    public static void main(String[] args) {
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter full text");
-        String mainString = myObj.nextLine();  // Read user input
-        System.out.println("Enter looked for string");
-        String subString = myObj.nextLine();
-        while(true){
-            System.out.println("Next(n) or Previous(p) ?");
-            String response = myObj.nextLine();
-            if(response.equals("n")){
-                new BruteForceSearch(mainString, subString).forward();
-            } else if (response.equals("p")) {
-                new BruteForceSearch(mainString, subString).backward();
-            }
-            else {
-                System.out.println("Invalid input");
-                break;
-            }
-
-
-        }
-
-
-
-
-        if (result != ) {
-            System.out.println("Pattern found at index: " + result);
-        } else {
-            System.out.println("Pattern not found.");
-        }
-    }
-}
