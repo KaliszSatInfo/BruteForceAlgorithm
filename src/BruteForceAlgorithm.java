@@ -24,8 +24,8 @@ public class BruteForceAlgorithm {
     }
 
     public void moveNext() {
-        mainString = textArea.getText();
-        substring = patternField.getText();
+        mainString = textArea.getText().toLowerCase();
+        substring = patternField.getText().toLowerCase();
 
         if (substring.isEmpty()) {
             showMessage("Please enter a pattern.");
